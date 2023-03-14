@@ -13,8 +13,8 @@ int main() {
   std::chrono::microseconds elapsed_time;
   auto start = std::chrono::high_resolution_clock::now();
 
-  QuickSort(values, 0, values.size() - 1);
-  
+  QuickSort(&values, 0, values.size() - 1);
+
   auto end = std::chrono::high_resolution_clock::now();
   std::chrono::duration_cast<std::chrono::microseconds>(end - start);
   cout << "Elapsed time: " << elapsed_time.count() << " milliseconds" << endl;

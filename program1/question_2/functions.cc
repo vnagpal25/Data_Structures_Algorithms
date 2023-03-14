@@ -1,3 +1,6 @@
+// Copyright 2023 CSCE350
+// Author vnagpal
+// all function implementations
 #include "functions.h"
 
 #include <algorithm>
@@ -13,17 +16,17 @@ vector<double> ReadInput(string file_name) {
   while (input >> value) values.push_back(value);
   return values;
 }
-int Partition(vector<double> &values, int low, int high) {
+int Partition(vector<double> *values, int low, int high) {
   // Hoare partition as explained in textbook
-  double pivot = values[low];  // picking first element as pivot
+  double pivot = (*values)[low];  // picking first element as pivot
   int i = low;
   int j = high;
   while (true) {
     // finds the index first element from the left that is >= than the pivot
-    while (values[i] < pivot) i++;
+    while ((*values)[i] < pivot) i++;
 
     // finds the index first element from the right that is <= than the pivot
-    while (values[j] > pivot) j--;
+    while ((*values)[j] > pivot) j--;
     // then we have traversed over the index of the pivot and we should return
     // it
     if (i >= j) return j;
@@ -31,10 +34,10 @@ int Partition(vector<double> &values, int low, int high) {
     // swaps to move smaller value(that was found after expected pivot index)
     // before pivot index, and bigger value(that was found before expected pivot
     // index) to after pivot index
-    swap(values[i], values[j]);
+    swap((*values)[i], (*values)[j]);
   }
 }
-void QuickSort(vector<double> &values, int low, int high) {
+void QuickSort(vector<double> *values, int low, int high) {
   // base case(0-1 elements):
   // when low == high, singular element, need not be sorted
   //  when low>high, there is no element, nothing to sort
