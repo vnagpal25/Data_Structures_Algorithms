@@ -38,4 +38,6 @@ void QuickSort(vector<double>* values, int low, int high);
  * @param high the right-most index of the sub-vector
  */
 int Partition(vector<double>* values, int low, int high);
+
+int RunQuickSort(int input_size);
 #endif  // _FUNCTIONS_H_

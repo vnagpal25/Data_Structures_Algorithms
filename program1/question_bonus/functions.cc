@@ -6,9 +6,11 @@
 #include <algorithm>
 #include <fstream>
 #include <iostream>
-#include <vector>
 #include <utility>
-using std::ifstream, std::vector, std::swap, std::cout, std::endl;
+#include <vector>
+#include <ctime>
+using std::ifstream, std::vector, std::swap, std::cout, std::endl,
+    std::ofstream, std::to_string;
 
 vector<double> ReadInput(string file_name) {
   ifstream input(file_name);
@@ -17,6 +19,7 @@ vector<double> ReadInput(string file_name) {
   while (input >> value) values.push_back(value);
   return values;
 }
+
 int Partition(vector<double> *values, int low, int high) {
   // Hoare partition as explained in textbook
   double pivot = (*values)[low];  // picking first element as pivot
@@ -38,6 +41,7 @@ int Partition(vector<double> *values, int low, int high) {
     swap((*values)[i], (*values)[j]);
   }
 }
+
 void QuickSort(vector<double> *values, int low, int high) {
   // base case(0-1 elements):
   // when low == high, singular element, need not be sorted
@@ -53,4 +57,17 @@ void QuickSort(vector<double> *values, int low, int high) {
 
   // sorts everything after pivot
   QuickSort(values, pi + 1, high);
+}
+
+int RunQuickSort(int input_size) {
+  for (int i = 1; i <= 10; i++) {
+    string file_name = "input" + to_string(i) + ".txt";
+    ofstream out_file(file_name);
+    // in each file, put amount input_size floating point numbers
+    for(int j = 0; j<input_size;j++){
+      srand(time(NULL));
+      out_file << rand() % 19 + (-9) << " ";
+    }
+    out_file.close();
+  }
 }
