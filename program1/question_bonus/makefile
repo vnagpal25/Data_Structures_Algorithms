@@ -22,4 +22,4 @@ functions.o: functions.cc functions.h
 	$(compile) functions.cc
 
 clean:
-	rm *.o quicksort_empirical
+	rm *.o quicksort_empirical input* output*

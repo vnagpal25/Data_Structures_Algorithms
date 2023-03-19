@@ -40,4 +40,8 @@ void QuickSort(vector<double>* values, int low, int high);
 int Partition(vector<double>* values, int low, int high);
 
 int RunQuickSort(int input_size);
+
+vector<int> GenerateNSortFiles(int input_size);
+
+void Print(vector<double> nums);
 #endif  // _FUNCTIONS_H_
