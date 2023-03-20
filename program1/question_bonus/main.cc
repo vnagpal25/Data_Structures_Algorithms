@@ -1,15 +1,13 @@
 // Copyright 2023 CSCE350
 // Author vnagpal
 // main method for quicksort numbers in input file
-#include <chrono>
 #include <fstream>
 #include <iostream>
 #include <string>
 #include <vector>
 
 #include "functions.h"
-using std::cout, std::endl, std::string, std::vector, std::ofstream,
-    std::ifstream, std::to_string;
+using std::cout, std::endl;
 int main() {
   cout << "average run time for quick sort for sorting 10 numbers: "
        << RunQuickSort(10) << " microseconds" << endl;
