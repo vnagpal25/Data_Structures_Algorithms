@@ -105,7 +105,7 @@ vector<int> GenerateNSortFiles(int input_size) {
     // cout << iteration << "SORTED" << endl;
 
     auto end = high_resolution_clock::now();
-    std::chrono::duration_cast<microseconds>(end - start);
+    elapsed_time = std::chrono::duration_cast<microseconds>(end - start);
     run_times.push_back(elapsed_time.count());
     ofstream output_file(output_file_name);
     for (int j = 0; j < static_cast<int>(values.size()); j++)
