@@ -37,8 +37,9 @@ int Partition(vector<double> *values, int low, int high) {
     // then we have traversed over the index of the pivot and we should
     // return
     // it
-    // cout << "i,j" << i << " " << j << " " << (*values)[i] << " " << (*values)[j]
-        //  << endl;
+    // cout << "i,j" << i << " " << j << " " << (*values)[i] << " " <<
+    // (*values)[j]
+    //  << endl;
     // cout << "are they equal: " << ((*values)[i] == (*values)[j]) << endl;
     if (i >= j || ((*values)[i] == (*values)[j])) {
       // cout << "Done partition\n" << endl;
@@ -67,7 +68,7 @@ void QuickSort(vector<double> *values, int low, int high) {
   int pi = Partition(values, low, high);
 
   // sorts everything before pivot
-  QuickSort(values, low, pi-1);
+  QuickSort(values, low, pi - 1);
 
   // sorts everything after pivot
   QuickSort(values, pi + 1, high);
@@ -76,22 +77,22 @@ void QuickSort(vector<double> *values, int low, int high) {
 vector<int> GenerateNSortFiles(int input_size) {
   vector<int> run_times;
   srand(time(NULL));
-  cout << "entering for loop" << endl;
   for (int i = 1; i <= 100; i++) {
-    string iteration = "int i = " + to_string(i) + ", ";
     string input_file_name = "input" + to_string(i) + ".txt";
+
     string output_file_name = "output" + to_string(i) + ".txt";
+
     ofstream out_file(input_file_name);
     // in each file, put amount input_size floating point numbers
-    cout << iteration << "populating file with random numbers" << endl;
+    // cout << iteration << "populating file with random numbers" << endl;
     for (int j = 0; j < input_size; j++) {
       double rand_num = static_cast<double>(rand()) /
                             static_cast<double>(RAND_MAX) * (2 * input_size) -
                         input_size;
       out_file << rand_num << " ";
     }
-    cout << iteration << "done populating file with random numbers" << endl
-         << iteration << "reading input now" << endl;
+    // cout << iteration << "done populating file with random numbers" << endl
+    //      << iteration << "reading input now" << endl;
     out_file.close();
 
     vector<double> values = ReadInput(input_file_name);
@@ -99,33 +100,30 @@ vector<int> GenerateNSortFiles(int input_size) {
     microseconds elapsed_time;
     auto start = high_resolution_clock::now();
 
-    cout << iteration << "sorting said file" << endl;
+    // cout << iteration << "sorting said file" << endl;
     QuickSort(&values, 0, values.size() - 1);
-    cout << iteration << "SORTED" << endl;
-    ofstream output_file(output_file_name);
-    // in each file, put amount input_size floating point numbers
-    for (int j = 0; j < values.size(); j++) {
-      output_file << values[j] << " ";
-    }
+    // cout << iteration << "SORTED" << endl;
 
     auto end = high_resolution_clock::now();
     std::chrono::duration_cast<microseconds>(end - start);
     run_times.push_back(elapsed_time.count());
+    ofstream output_file(output_file_name);
+    for (int j = 0; j < static_cast<int>(values.size()); j++)
+      output_file << values[j] << " ";
   }
   return run_times;
 }
 
 int RunQuickSort(int input_size) {
-  cout << "Analyzing for input_size " << input_size << endl;
+  // cout << "Analyzing for input_size " << input_size << endl;
   vector<int> run_times = GenerateNSortFiles(input_size);
-  cout << "Done for input_size " << input_size << endl;
+  // cout << "Done for input_size " << input_size << endl;
 
   int sum = 0;
   for (int i = 0; i < static_cast<int>(run_times.size()); i++)
     sum += run_times[i];
   double avg_time =
       static_cast<double>(sum) / static_cast<double>(run_times.size());
-  cout << "*******" << endl << endl;
   return avg_time;
 }
 
