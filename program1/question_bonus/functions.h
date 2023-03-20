@@ -1,6 +1,6 @@
 // Copyright 2023 CSCE350
 // Author vnagpal
-// all function definitions
+// all function definitions for quicksort empirical analysis
 #ifndef _FUNCTIONS_H_
 #define _FUNCTIONS_H_
 #include <iostream>
@@ -39,9 +39,28 @@ void QuickSort(vector<double>* values, int low, int high);
  */
 int Partition(vector<double>* values, int low, int high);
 
+/**
+ * method is meant to take in an input size and run quicksort on lists of that
+ * many numbers
+ * @param input_size how many floating point numbers will be sorted
+ * @return an int that specifies the average time in milliseconds that it takes
+ * to run quicksort on specified input size
+ */
 int RunQuickSort(int input_size);
 
+/**
+ * method is meant to generate 100 input files, populate them with input_size
+ * random floating point numbers, sort them, and write their sorted contents
+ * into output files
+ * @param input_size how many floating point numbers will be in each file
+ * @return a vector of size 100 that will contain the amount of time it took to
+ * run quicksort for each input file
+ */
 vector<int> GenerateNSortFiles(int input_size);
 
+/**
+ * simple print method
+ * @param nums vector to be printed
+ */
 void Print(vector<double> nums);
 #endif  // _FUNCTIONS_H_
