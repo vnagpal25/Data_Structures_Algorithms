@@ -12,31 +12,18 @@ using std::cout, std::endl, std::string, std::vector, std::ofstream,
     std::ifstream, std::to_string;
 int main() {
   cout << "average run time for quick sort for sorting 10 numbers: "
-       << RunQuickSort(10) << endl;
+       << RunQuickSort(10) << " microseconds" << endl;
+
   cout << "average run time for quick sort for sorting 100 numbers: "
-       << RunQuickSort(100) << endl;
-  cout << "average run time for quick sort for sorting 1000 numbers: "
-       << RunQuickSort(1000) << endl;
-  cout << "average run time for quick sort for sorting 1000 numbers: "
-       << RunQuickSort(10000) << endl;
-    cout << "average run time for quick sort for sorting 1000 numbers: "
-       << RunQuickSort(100000) << endl;
-  // string file_name = "input.txt";
-  // vector<double> values = ReadInput("input.txt");
+       << RunQuickSort(100) << " microseconds" << endl;
 
-  // std::chrono::microseconds elapsed_time;
-  // auto start = std::chrono::high_resolution_clock::now();
+  cout << "average run time for quick sort for sorting 1,000 numbers: "
+       << RunQuickSort(1000) << " microseconds" << endl;
 
-  // QuickSort(&values, 0, values.size() - 1);
+  cout << "average run time for quick sort for sorting 10,000 numbers: "
+       << RunQuickSort(10000) << " microseconds" << endl;
 
-  // auto end = std::chrono::high_resolution_clock::now();
-  // std::chrono::duration_cast<std::chrono::microseconds>(end - start);
-  // cout << "Elapsed time: " << elapsed_time.count() << " milliseconds" <<
-  // endl;
-
-  // ofstream out_file("output.txt");
-  // for (int i = 0; i < static_cast<int>(values.size()); i++)
-  //   out_file << values[i] << " ";
-  // out_file << endl;
-  // return 0;
+  cout << "average run time for quick sort for sorting 100,000 numbers: "
+       << RunQuickSort(100000) << " microseconds" << endl;
+  return 0;
 }
