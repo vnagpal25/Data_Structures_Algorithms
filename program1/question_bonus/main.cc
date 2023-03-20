@@ -11,13 +11,16 @@
 using std::cout, std::endl, std::string, std::vector, std::ofstream,
     std::ifstream, std::to_string;
 int main() {
-  // cout << "average run time for quick sort for sorting 10 numbers: "
-  //      << RunQuickSort(10) << endl;
-  // cout << "average run time for quick sort for sorting 100 numbers: "
-  //      << RunQuickSort(100) << endl;
+  cout << "average run time for quick sort for sorting 10 numbers: "
+       << RunQuickSort(10) << endl;
+  cout << "average run time for quick sort for sorting 100 numbers: "
+       << RunQuickSort(100) << endl;
   cout << "average run time for quick sort for sorting 1000 numbers: "
        << RunQuickSort(1000) << endl;
-
+  cout << "average run time for quick sort for sorting 1000 numbers: "
+       << RunQuickSort(10000) << endl;
+    cout << "average run time for quick sort for sorting 1000 numbers: "
+       << RunQuickSort(100000) << endl;
   // string file_name = "input.txt";
   // vector<double> values = ReadInput("input.txt");
 
