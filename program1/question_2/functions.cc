@@ -6,16 +6,18 @@
 #include <algorithm>
 #include <fstream>
 #include <iostream>
-#include <vector>
 #include <utility>
+#include <vector>
 using std::ifstream, std::vector, std::swap, std::cout, std::endl;
 
 vector<double> ReadInput(string file_name) {
-  ifstream input(file_name);
-  vector<double> values;
-  double value;
+  ifstream input(file_name);  // allows us to read file
+  vector<double> values;      // double of values to be returned
+  double value;               // particular value
+
+  // while can read value, put it in the vector
   while (input >> value) values.push_back(value);
-  return values;
+  return values;  // returns
 }
 int Partition(vector<double> *values, int low, int high) {
   // Hoare partition as explained in textbook

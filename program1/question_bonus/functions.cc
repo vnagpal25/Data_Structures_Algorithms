@@ -1,6 +1,6 @@
 // Copyright 2023 CSCE350
 // Author vnagpal
-// all function implementations
+// all function implementations for quicksort empirical analysis
 #include "functions.h"
 
 #include <algorithm>
@@ -15,11 +15,13 @@ using std::ifstream, std::vector, std::swap, std::cout, std::endl,
     std::chrono::high_resolution_clock;
 
 vector<double> ReadInput(string file_name) {
-  ifstream input(file_name);
-  vector<double> values;
-  double value;
+  ifstream input(file_name);  // allows us to read file
+  vector<double> values;      // double of values to be returned
+  double value;               // particular value
+
+  // while can read value, put it in the vector
   while (input >> value) values.push_back(value);
-  return values;
+  return values;  // returns
 }
 
 int Partition(vector<double> *values, int low, int high) {
