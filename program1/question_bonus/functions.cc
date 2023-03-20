@@ -24,6 +24,7 @@ vector<double> ReadInput(string file_name) {
 
 int Partition(vector<double> *values, int low, int high) {
   // Hoare partition as explained in textbook
+  // cout << "Partition " << low << " " << high << endl;
   double pivot = (*values)[low];  // picking first element as pivot
   int i = low;
   int j = high;
@@ -33,13 +34,22 @@ int Partition(vector<double> *values, int low, int high) {
 
     // finds the index first element from the right that is <= than the pivot
     while ((*values)[j] > pivot) j--;
-    // then we have traversed over the index of the pivot and we should return
+    // then we have traversed over the index of the pivot and we should
+    // return
     // it
-    if (i >= j) return j;
+    // cout << "i,j" << i << " " << j << " " << (*values)[i] << " " << (*values)[j]
+        //  << endl;
+    // cout << "are they equal: " << ((*values)[i] == (*values)[j]) << endl;
+    if (i >= j || ((*values)[i] == (*values)[j])) {
+      // cout << "Done partition\n" << endl;
+      return j;
+    }
 
     // swaps to move smaller value(that was found after expected pivot index)
-    // before pivot index, and bigger value(that was found before expected pivot
+    // before pivot index, and bigger value(that was found before expected
+    // pivot
     // index) to after pivot index
+    // cout << "i,j" << i << " " << j << endl;
     swap((*values)[i], (*values)[j]);
   }
 }
@@ -48,15 +58,16 @@ void QuickSort(vector<double> *values, int low, int high) {
   // base case(0-1 elements):
   // when low == high, singular element, need not be sorted
   //  when low>high, there is no element, nothing to sort
+  // cout << "low, high:" << low << " " << high << endl;
   if (low >= high) return;
 
-  //cout << "low, high: " << low << ", " << high << endl;
-  // pi is the correct index of the pivot
-  // element within the to-be-sorted array
+  // cout << "low, high: " << low << ", " << high << endl;
+  //  pi is the correct index of the pivot
+  //  element within the to-be-sorted array
   int pi = Partition(values, low, high);
 
   // sorts everything before pivot
-  QuickSort(values, low, pi);
+  QuickSort(values, low, pi-1);
 
   // sorts everything after pivot
   QuickSort(values, pi + 1, high);
@@ -68,8 +79,9 @@ vector<int> GenerateNSortFiles(int input_size) {
   cout << "entering for loop" << endl;
   for (int i = 1; i <= 100; i++) {
     string iteration = "int i = " + to_string(i) + ", ";
-    string file_name = "input" + to_string(i) + ".txt";
-    ofstream out_file(file_name);
+    string input_file_name = "input" + to_string(i) + ".txt";
+    string output_file_name = "output" + to_string(i) + ".txt";
+    ofstream out_file(input_file_name);
     // in each file, put amount input_size floating point numbers
     cout << iteration << "populating file with random numbers" << endl;
     for (int j = 0; j < input_size; j++) {
@@ -81,8 +93,8 @@ vector<int> GenerateNSortFiles(int input_size) {
     cout << iteration << "done populating file with random numbers" << endl
          << iteration << "reading input now" << endl;
     out_file.close();
-    
-    vector<double> values = ReadInput(file_name);
+
+    vector<double> values = ReadInput(input_file_name);
 
     microseconds elapsed_time;
     auto start = high_resolution_clock::now();
@@ -90,6 +102,11 @@ vector<int> GenerateNSortFiles(int input_size) {
     cout << iteration << "sorting said file" << endl;
     QuickSort(&values, 0, values.size() - 1);
     cout << iteration << "SORTED" << endl;
+    ofstream output_file(output_file_name);
+    // in each file, put amount input_size floating point numbers
+    for (int j = 0; j < values.size(); j++) {
+      output_file << values[j] << " ";
+    }
 
     auto end = high_resolution_clock::now();
     std::chrono::duration_cast<microseconds>(end - start);
