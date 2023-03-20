@@ -19,8 +19,8 @@ int main() {
   QuickSort(&values, 0, values.size() - 1);
 
   auto end = std::chrono::high_resolution_clock::now();
-  std::chrono::duration_cast<std::chrono::microseconds>(end - start);
-  cout << "Elapsed time: " << elapsed_time.count() << " milliseconds" << endl;
+  elapsed_time = std::chrono::duration_cast<std::chrono::microseconds>(end - start);
+  cout << "Elapsed time: " << elapsed_time.count() << " microseconds" << endl;
 
   ofstream out_file("output.txt");
   for (int i = 0; i < static_cast<int>(values.size()); i++)
