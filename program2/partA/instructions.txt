@@ -1,0 +1,4 @@
+implement two separate functions, one for min_heap and for max_heap
+input: first line is the number of keys, second line is the keys space delimited
+
+output: constructed heap as an array, output execution time
