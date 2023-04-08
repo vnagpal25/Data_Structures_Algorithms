@@ -12,25 +12,19 @@ link = $(cc) $(flags) $^ -o #links all prerequisites
 
 compile = $(cc) $(flags) -c $< -o #compiles first prerequisite
 
-make: bin maxheap minheap
+make: bin heapsort
 
-maxheap: bin/maxheap.o bin/functions.o
-	$(link) $@
-
-minheap: bin/minheap.o bin/functions.o
+heapsort: bin/heapsort.o bin/functions.o
 	$(link) $@
 
 bin:
 	mkdir -p bin
 
-bin/maxheap.o: src/maxheap.cc
-	$(compile) $@
-
-bin/minheap.o: src/minheap.cc
+bin/heapsort.o: src/heapsort.cc
 	$(compile) $@
 
 bin/functions.o: src/functions.cc
 	$(compile) $@
 
 clean:
-	rm -f bin/*.o maxheap minheap
+	rm -f bin/*.o heapsort
