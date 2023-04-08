@@ -1,6 +1,12 @@
+/**
+ * Copyright 2023 - Function implementations for Heapifying
+ * Author - vnagpal
+ */
 #include "partA/inc/functions.h"
 // for readability of code
-using std::ifstream, std::ofstream, std::cout, std::cerr, std::endl;
+using std::ifstream, std::ofstream, std::cout, std::cerr, std::endl,
+    std::chrono::microseconds, std::chrono::high_resolution_clock;
+
 int* ReadInput(string file_name, int* kSize) {
   // initializes file reader
   ifstream file_in(file_name);
@@ -25,13 +31,22 @@ int* ReadInput(string file_name, int* kSize) {
 }
 
 void PrintHeap(int* array, int size) {
+  // initializes the file writer
   ofstream out_file("output.txt");
+
+  // writes each element of the heap space delimited
   for (int i = 0; i < size; i++) out_file << array[i] << " ";
 }
 
 void MaxHeapBottomUp(string file_name) {
-  int size;
+  int size;  // size of the heap
+
+  // populates heap array from input.txt
   int* heap = ReadInput("input.txt", &size);
+
+  // for measuring algorithm time
+  microseconds elapsed_time;  // run time = end - start
+  auto start = high_resolution_clock::now();
 
   // implement bottom up algorithm
   for (int i = floor(size / 2); i >= 1; i--) {
@@ -89,13 +104,25 @@ void MaxHeapBottomUp(string file_name) {
     heap[k] = v;
   }
 
+  // stops measuring execution time since heap is constructed
+  auto end = high_resolution_clock::now();
+  elapsed_time = std::chrono::duration_cast<microseconds>(end - start);
+  cout << "Execution time for creating Max Heap: " << elapsed_time.count()
+       << " microseconds" << endl;
+
+  // writes heap to output.txt
   PrintHeap(heap, size);
 }
 
-// same as MaxHeapBottomUp but < instead of >
 void MinHeapBottomUp(string file_name) {
-  int size;
+  int size;  // size of the heap
+
+  // populates heap array from input.txt
   int* heap = ReadInput("input.txt", &size);
+
+  // for measuring algorithm time
+  microseconds elapsed_time;  // run time = end - start
+  auto start = high_resolution_clock::now();
 
   // implement bottom up algorithm
   for (int i = floor(size / 2); i >= 1; i--) {
@@ -152,5 +179,13 @@ void MinHeapBottomUp(string file_name) {
     // being continuously displaced, would be placed in this new spot.
     heap[k] = v;
   }
+
+  // stops measuring execution time since heap is constructed
+  auto end = high_resolution_clock::now();
+  elapsed_time = std::chrono::duration_cast<microseconds>(end - start);
+  cout << "Execution time for creating Min Heap: " << elapsed_time.count()
+       << " microseconds" << endl;
+
+  // writes heap to output.txt
   PrintHeap(heap, size);
 }
