@@ -4,8 +4,8 @@
  */
 #ifndef PROGRAM2_BONUS_INC_FUNCTIONS_H_
 #define PROGRAM2_BONUS_INC_FUNCTIONS_H_
-#include <algorithm>  // swap
-#include <cmath>      // floor()
+#include <algorithm>  // swap function
+#include <cmath>      // floor() function
 #include <fstream>    // I/O to files
 #include <iostream>   // I/O
 #include <string>     // string functionality
