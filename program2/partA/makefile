@@ -8,18 +8,29 @@ flags += -pedantic  # even more warnings
 flags += -I $(path)  # add parent to preprocessor include path
 flags += -g  # include gdb instrumentation
 
-link = $(cc) $(flags) -o  # final linked build to binary executable
+link = $(cc) $(flags) $^ -o #links all prerequisites
 
-compile = $(cc) $(flags) -c  # compilation to intermediary .o files
+compile = $(cc) $(flags) -c $< -o #compiles first prerequisite
 
-heap-bottom-up: main.o functions.o
-	$(link) heap-bottom-up main.o functions.o
+make: bin maxheap minheap
 
-main.o: main.cc
-	$(compile) main.cc
+maxheap: bin/maxheap.o bin/functions.o
+	$(link) $@
 
-functions.o: functions.cc
-	$(compile) functions.cc
+minheap: bin/minheap.o bin/functions.o
+	$(link) $@
+
+bin:
+	mkdir -p bin
+
+bin/maxheap.o: src/maxheap.cc
+	$(compile) $@
+
+bin/minheap.o: src/minheap.cc
+	$(compile) $@
+
+bin/functions.o: src/functions.cc
+	$(compile) $@
 
 clean:
-	rm *.o heap-bottom-up
+	rm -f bin/*.o maxheap minheap

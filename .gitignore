@@ -14,3 +14,11 @@ program2/partA/functions.o
 program2/partA/heap-bottom-up
 .gitignore
 program2/partA/.vscode/settings.json
+program2/partA/minheap.o
+program2/partA/maxheap
+program2/partA/minheap
+program2/partA/maxheap.o
+program2/partA/bin/minheap.o
+program2/partA/bin/maxheap.o
+.gitignore
+program2/partA/bin/functions.o

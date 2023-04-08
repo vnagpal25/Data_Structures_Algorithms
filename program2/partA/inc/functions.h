@@ -1,5 +1,5 @@
-#ifndef _PROGRAM2_FUNCTIONS_H_
-#define _PROGRAM2_FUNCTIONS_H_
+#ifndef _PROGRAM2_PARTA_INC_FUNCTIONS_H_
+#define _PROGRAM2_PARTA_INC_FUNCTIONS_H_
 #include <cmath>
 #include <fstream>
 #include <iostream>
@@ -9,4 +9,4 @@ void MaxHeapBottomUp(string file_name);
 void MinHeapBottomUp(string file_name);
 void PrintHeap(int* array, int size);
 
-#endif  // _PROGRAM2_FUNCTIONS_H_
+#endif  // _PROGRAM2_PARTA_INC_FUNCTIONS_H_
