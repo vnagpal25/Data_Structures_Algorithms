@@ -22,3 +22,4 @@ program2/partA/bin/minheap.o
 program2/partA/bin/maxheap.o
 .gitignore
 program2/partA/bin/functions.o
+program2/partA/.vscode/settings.json
