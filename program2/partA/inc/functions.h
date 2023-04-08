@@ -1,10 +1,10 @@
 /**
  * Copyright 2023 - Function definitions for Heapifying
  * Author - vnagpal
- *
  */
 #ifndef PROGRAM2_PARTA_INC_FUNCTIONS_H_
 #define PROGRAM2_PARTA_INC_FUNCTIONS_H_
+#include <chrono>    // for execution times
 #include <cmath>     // floor()
 #include <fstream>   // I/O to files
 #include <iostream>  // I/O
