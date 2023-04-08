@@ -23,3 +23,8 @@ program2/partA/bin/maxheap.o
 .gitignore
 program2/partA/bin/functions.o
 program2/partA/.vscode/settings.json
+program2/bonus/heapsort
+program2/bonus/bin/heapsort.o
+program2/bonus/bin/functions.o
+program2/bonus/output.txt
+.gitignore
