@@ -42,50 +42,59 @@ void MaxHeapBottomUp(string file_name) {
 
   // implement bottom up algorithm
   for (int i = floor(size / 2); i >= 1; i--) {
-    int k = i-1;
+    // -1 to ensure that heap logic for indexing is obeyed, for a heap the
+    // starting index is 1, but in c++ the starting index is 0
+    int k = i - 1;
 
+    // keeps track of the parent node
     int v = heap[k];
 
-    bool isHeap = false;
-    while (!isHeap && 2 * k <= size) {
-      int j = 2 * k;
-      if (j < size + 1) {
-        cout << "There are two children" << endl;
-        if (heap[j] < heap[j+1]) {
-          cout << "heap[" << j << "] < "
-               << "heap[" << j+1 << "]" << endl;
+    // boolean to decide whether the parental dominance or "heap" condition is
+    // satisfied or not
+    bool is_heap = false;
 
-          j++;
-        } else {
-          cout << "heap[" << j << "] > "
-               << "heap[" << j+1 << "]" << endl;
+    // while loop iterates until parental dominance condition is satisfied, or
+    // end of heap has been reached(v will be the last child node/node in the
+    // heap). If 2k + 1 <= size, this means there are no more child nodes. Again
+    // the - 1 is so that the the indexing is properly obeyed
+    while (!is_heap && (2 * k + 1 <= size)) {
+      // in heap, j = 2k is the index of the first child of an element with
+      // index k
+      int j = 2 * k + 1;  // basically j - 1  = 2k, because of indexing
 
-          cout << "heap[" << j << "] = " << heap[j] << endl;
-          cout << "heap[" << j+1 << "] = " << heap[j+1] << endl;
-        }
-      }
+      // again, j + 1 instead of j here because of indexing, checking if the
+      // element number is less than the size. If yes, that means there is still
+      // at least another child on the same level, so we need to compare its
+      // value to the first child nodes. if the second child is bigger, need to
+      // increment j, so that its value reflects that of the larger child.
+      // Ultimately, we need to compare the parent to the largest child to
+      // determine a swap. If no, that means it is the last child(last element
+      // in the heap).
+      if ((j + 1 < size) && (heap[j] < heap[j + 1])) j++;
+
       if (v >= heap[j]) {
-        isHeap = true;
+        // this means that the parental dominance condition is true, no need to
+        // swap
+        is_heap = true;
       } else {
+        // if the parental dominance condition is violated (the larger child is
+        // bigger than the parent), then we need to swap the parent with its
+        // child
+        // places the child in the parents node
         heap[k] = heap[j];
+
+        // setting k to j. For the next iteration, it will check the parental
+        // dominance condition if the displaced node (with value v) can be
+        // placed at new k.
         k = j;
       }
     }
+    // this places the child in the parents node if there was a
+    // swap, if there was not a swap, it does not change anything (place element
+    // back in its own spot). Also if 2k + 1 was >= size, the node that was
+    // being continuously displaced, would be placed in this new spot.
     heap[k] = v;
   }
 
   PrintHeap(heap, size);
-  /**
-   * for i ← n/2 downto 1 do
-k ← i; v ← H[k]
-heap ← false
-while not heap and 2 ∗ k ≤ n do
-j ← 2 ∗ k
-if j<n //there are two children
-if H[j ] < H[j + 1] j ← j + 1
-if v ≥ H[j ]
-heap ← true
-else H[k]← H[j ]; k ← j
-H[k]← v
-  */
 }
