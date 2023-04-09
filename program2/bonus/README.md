@@ -6,7 +6,7 @@ First, make sure you have the following in your directory:
 - inc/functions.h
 - input.txt
 
-Second, type "make heapsort" into the command line.
+Second, type "make clean", press enter,  then "make heapsort" then enter into the command line.
 
 Third, type "./heapsort" into the command line 
 
