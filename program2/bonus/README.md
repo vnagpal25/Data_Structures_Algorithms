@@ -1,10 +1,14 @@
 First, make sure you have the following in your directory:
 
 - makefile
-- functions.cc/.h
-- main.cc
+- src/functions.cc
+- src/heapsort.cc
+- inc/functions.h
 - input.txt
 
-Second, depending on if you want to run the minheap or maxheap function, type "make minheap" or "make maxheap"into the command line
+Second, type "make heapsort" into the command line.
 
-Third, type "./maxheap" if you want to execute the maxheap function, or "./minheap" if you want to execute the minheap function
+Third, type "./heapsort" into the command line 
+
+Check "output.txt" in the directory, the first line is a constructed heap of the data and the second line is the sorted data from smallest to largest using the heapsort algorithm.
+
