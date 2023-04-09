@@ -30,3 +30,7 @@ program3/partA/output.txt
 program3/partA/bin/functions.o
 program3/partA/bin/horspool.o
 program3/partA/.vscode/settings.json
+program3/bonus/bin/boyer_moore.o
+program3/bonus/bin/functions.o
+program3/bonus/boyer-moore
+program3/bonus/output.txt
