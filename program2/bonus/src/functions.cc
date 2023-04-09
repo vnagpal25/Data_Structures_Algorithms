@@ -29,33 +29,30 @@ int* ReadInput(string file_name, int* kSize) {
   return array;
 }
 
-void PrintHeap(int* array, int size) {
-  // initializes the file writer
-  ofstream out_file("output.txt");
-
-  // writes each element of the heap space delimited
-  for (int i = 0; i < size; i++) out_file << array[i] << " ";
-}
-
 void HeapSort(string file_name) {
   int size;
   int* heap = ReadInput(file_name, &size);
   MaxHeapBottomUp(heap, size);
+  ofstream out_file("output.txt");
+  for (int i = 0; i < size; i++) out_file << heap[i] << " ";
+  out_file << endl;
   // implement heapsort algorithm
   // apply root deletion operation n - 1 times
   int i = 0, new_size = size;
   while (i < size - 1) {
     // swap the first(largest) and last element of the heap
     swap(heap[0], heap[new_size - 1]);
+
+    // decrement size
     new_size--;
-    // Heapify smaller tree by shifting K down the tree'
+
+    // Heapify smaller tree by shifting K down the tree
     MaxHeapBottomUp(heap, new_size);
     i++;
   }
-  PrintHeap(heap, size);
+  for (int i = 0; i < size; i++) out_file << heap[i] << " ";
+  out_file << endl;
 }
-
-void RootDeletion(int* heap) {}
 
 void MaxHeapBottomUp(int* heap, int size) {
   // implement bottom up algorithm

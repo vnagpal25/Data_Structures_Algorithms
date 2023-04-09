@@ -1,5 +1,5 @@
 /**
- * Copyright 2023 - Function definitions for Heapifying
+ * Copyright 2023 - Function definitions for all things Heapsort
  * Author - vnagpal
  */
 #ifndef PROGRAM2_BONUS_INC_FUNCTIONS_H_
@@ -25,7 +25,7 @@ int* ReadInput(string file_name, int* kSize);
  * max heap of the integers in the file specified by file_name
  * @param file_name name of the file that contains the integers
  */
-//int* MaxHeapBottomUp(string file_name, int* size);
+// int* MaxHeapBottomUp(string file_name, int* size);
 
 void MaxHeapBottomUp(int* heap, int size);
 
