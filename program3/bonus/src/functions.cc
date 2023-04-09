@@ -46,9 +46,25 @@ void BadSymbolShiftTable(int* shift_table, int table_size,
   }
 }
 
+int findShift(string search_pattern, string substring, string mismatch) {
+  int pattern_len(search_pattern.length()), sublen(substring.length());
+  int suff_index = pattern_len - sublen;
+  string search_mismatch = mismatch;
+  while (search_mismatch == mismatch) {
+    int index = search_pattern.find(substring);
+    search_mismatch.substr();
+  }
+}
+
 void GoodSuffixShiftTable(int* shift_table, string search_pattern) {
   int pattern_size = search_pattern.size();
-  
+  for (int i = 1; i < pattern_size - 1; i++) {
+    // consider substring of length i from right side,
+    // find the distance from the end of the string to the closest
+    // substring(same as one of length i), with a different preceding character
+  }
+  shift_table[0] = 1;
+  shift_table[pattern_size - 1] = pattern_size;
 }
 
 int CharIndex(char c) {
@@ -94,7 +110,7 @@ void BoyerMoore(string file_name) {
   // populates bad shift table
   BadSymbolShiftTable(bad_shift_table, kTableSize, search_pattern);
 
-  int good_shift_table[pattern_size - 1];
+  int good_shift_table[pattern_size];
   GoodSuffixShiftTable(good_shift_table, search_pattern);
 
   for (int i = 0; i < pattern_size - 1; i++) cout << good_shift_table[i] << " ";
@@ -129,7 +145,7 @@ void BoyerMoore(string file_name) {
   //     // stop measuring execution time since algorithm is finished
   //     auto end = high_resolution_clock::now();
   //     elapsed_time = std::chrono::duration_cast<microseconds>(end - start);
-  //     cout << "Execution time for executing Horspool's Algorithm: "
+  //     cout << "Execution time for executing Boyer Moore's Algorithm: "
   //          << elapsed_time.count() << " microseconds" << endl;
 
   //     // writing index to ouput file
@@ -158,7 +174,7 @@ void BoyerMoore(string file_name) {
   // stop measuring execution time since algorithm is finished
   auto end = high_resolution_clock::now();
   elapsed_time = std::chrono::duration_cast<microseconds>(end - start);
-  cout << "Execution time for executing Horspool's Algorithm: "
+  cout << "Execution time for executing Boyer Moore's Algorithm: "
        << elapsed_time.count() << " microseconds" << endl;
 
   // wasn't found, so returns an index of -1

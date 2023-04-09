@@ -33,9 +33,12 @@ void ReadInput(string file_name, string* search_pattern, string* search_text);
  * @param search_pattern the search pattern string for which the shift table is
  * being constructed
  */
-void BadSymbolShiftTable(int* shift_table, int table_size, string search_pattern);
+void BadSymbolShiftTable(int* shift_table, int table_size,
+                         string search_pattern);
 
 void GoodSuffixShiftTable(int* shift_table, string search_pattern);
+
+int findShift(string search_pattern, string substring, string mismatch);
 /**
  * Helper function that is meant to calculate the index of each letter within
  * the alphabet: a - 0, b - 1, c - 2, ..., z - 25, ' ' - 26
