@@ -12,7 +12,6 @@ program1/question_2/.vscode/settings.json
 program2/partA/heap-bottom-up
 program2/partA/functions.o
 program2/partA/heap-bottom-up
-.gitignore
 program2/partA/.vscode/settings.json
 program2/partA/minheap.o
 program2/partA/maxheap
@@ -20,11 +19,14 @@ program2/partA/minheap
 program2/partA/maxheap.o
 program2/partA/bin/minheap.o
 program2/partA/bin/maxheap.o
-.gitignore
 program2/partA/bin/functions.o
 program2/partA/.vscode/settings.json
 program2/bonus/heapsort
 program2/bonus/bin/heapsort.o
 program2/bonus/bin/functions.o
 program2/bonus/output.txt
-.gitignore
+program3/partA/horspool
+program3/partA/output.txt
+program3/partA/bin/functions.o
+program3/partA/bin/horspool.o
+program3/partA/.vscode/settings.json
