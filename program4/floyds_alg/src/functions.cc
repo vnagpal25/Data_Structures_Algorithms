@@ -5,50 +5,69 @@
 #include "floyds_alg/inc/functions.h"
 // for readability of code
 using std::ifstream, std::ofstream, std::cout, std::cerr, std::endl,
-    std::chrono::microseconds, std::chrono::high_resolution_clock;
+    std::chrono::microseconds, std::chrono::high_resolution_clock, std::stod,
+    std::min;
 
-double** ReadInput(string file_name, int* kSize) {
-  string line;                  // a singe line that is read from the file
-  int char_count = 0;           // number of characters
-  ifstream in_file(file_name);  // ifstream for input.txt
+vector<vector<double>> ReadInput(string file_name, int* kSize) {
+  ifstream file_in(file_name);
+  vector<vector<double>> weight_mat;
 
-  // reads until there is nothing else to read
-  while (!in_file.eof()) {
-    getline(in_file, line);  // reads a single line from the file
+  string line;
+  while (file_in.good()) {
+    getline(file_in, line);
+    // line now has a row of the matrix
+    vector<double> row;
+    while (line.size()) {
+      // finds the space
+      const int index = static_cast<int>(line.find(" "));
+      // npos is -1; index will be -1 if kUS isn't found
+      if (index != static_cast<int>(string::npos)) {
+        // gets the string from beginning to space
+        string token = line.substr(0, index);
 
-    int num_chars = line.length();  // counts the number of characters per line
-    for (int n = 0; n < static_cast<int>(line.length()); n++)
-      if (line.at(n) == ' ') num_chars--;  // subtracts the spaces
+        // pushes back to vector everything up until delimiter
+        row.push_back(stod(token));
 
-    char_count += num_chars;
+        // changes the string to remove the
+        // part just pushed to the vector
+        line = line.substr(index + 1);
+      } else {
+        row.push_back(stod(line));  // " " not found, last element
+        line = "";                  // exit condition for while loop
+      }
+    }
+    weight_mat.push_back(row);
   }
-
-  // checks if number of characters is a perfect square(thus proper adjacency
-  // matrix)
-  if (sqrt(char_count) == floor(sqrt(char_count))) {
-    ifstream input_file2(
-        file_name);  // separate ifstream for populating char array
-
-    *kSize = static_cast<int>(sqrt(char_count));     // sets size n of matrix
-    double** adjacency_mat = new double*[(*kSize)];  // creates a row
-    for (int i = 0; i < (*kSize); i++)
-      adjacency_mat[i] =
-          new double[(*kSize)];  // gives each element of the row a column
-
-    for (int row = 0; row < (*kSize); row++)
-      for (int col = 0; col < (*kSize); col++)
-        input_file2 >> adjacency_mat[row][col];  // populates the matrix
-    return adjacency_mat;                        // returns the matrix
-  }
-  return nullptr;
+  return weight_mat;
 }
 
 void FloydsAlgorithm(string file_name) {
   int size = 0;
-  double** weight_mat = ReadInput(file_name, &size);
+  vector<vector<double>> weight_mat = ReadInput(file_name, &size);
 
-  for (int i = 0; i < size; i++) {
-    for (int j = 0; j < size; j++) cout << weight_mat[i][j] << " ";
+  for (int i = 0; i < static_cast<int>(weight_mat.size()); i++) {
+    for (int j = 0; j < static_cast<int>(weight_mat[i].size()); j++) {
+      if ((i != j) && weight_mat[i][j] == 0) {
+        cout << "shouldn't print" << endl;
+        weight_mat[i][j] = std::numeric_limits<double>::infinity();
+      }
+      cout << weight_mat[i][j] << "\t";
+    }
+    cout << endl;
+  }
+  cout << endl;
+  vector<vector<double>> dist_mat = weight_mat;
+  for (size_t k = 0; k < dist_mat.size(); k++) {
+    for (size_t i = 0; i < dist_mat.size(); i++) {
+      for (size_t j = 0; j < dist_mat.size(); j++) {
+        dist_mat[i][j] = min(dist_mat[i][j], dist_mat[i][k] + dist_mat[k][j]);
+      }
+    }
+  }
+  for (size_t i = 0; i < dist_mat.size(); i++) {
+    for (size_t j = 0; j < dist_mat.size(); j++) {
+      cout << dist_mat[i][j] << "\t";
+    }
     cout << endl;
   }
 }

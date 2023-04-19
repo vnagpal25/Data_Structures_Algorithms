@@ -7,7 +7,8 @@ First, make sure you have the following in your directory:
 - src/minheap.cc
 - input.txt
   - make sure disconnected nodes are represented by 0 weight distances as well
-  - have the input formatted as, with spaces within lines:
+  - have the input formatted as, with spaces within lines. If infinite distance between two nodes
+    , represent as inf in the input:
     - X X X X
     - X X X X
     - X X X X

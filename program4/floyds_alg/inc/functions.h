@@ -9,7 +9,8 @@
 #include <fstream>   // I/O to files
 #include <iostream>  // I/O
 #include <string>    // string functionality
-using std::string;   // readability
+#include <vector>    //vector functionality
+using std::string, std::vector;   // readability
 
 /**
  * method reads the input.txt file and populates a 2d double array representing
@@ -19,7 +20,7 @@ using std::string;   // readability
  * @return a 2d char array that is populated with 1s and 0s representing the
  * distance matrix
  */
-double** ReadInput(string file_name, int* size);
+vector<vector<double>> ReadInput(string file_name, int* size);
 
 void FloydsAlgorithm(string file_name);
 #endif  // PROGRAM2_FLOYDS_ALG_INC_FUNCTIONS_H_
