@@ -36,6 +36,5 @@ program3/bonus/boyer-moore
 program3/bonus/output.txt
 program4/floyds_alg/.vscode/settings.json
 program4/floyds_alg/bin/functions.o
-.gitignore
 program4/floyds_alg/bin/floyds.o
 program4/floyds_alg/floyds
