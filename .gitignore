@@ -39,3 +39,6 @@ program4/floyds_alg/bin/functions.o
 program4/floyds_alg/bin/floyds.o
 program4/floyds_alg/floyds
 program4/max_bipartite_matching/.vscode/settings.json
+program4/max_bipartite_matching/bin/functions.o
+program4/max_bipartite_matching/bipartite
+program4/max_bipartite_matching/bin/max_bipartite.o
