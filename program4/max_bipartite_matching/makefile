@@ -12,9 +12,9 @@ link = $(cc) $(flags) $^ -o #links all prerequisites
 
 compile = $(cc) $(flags) -c $< -o #compiles first prerequisite
 
-make: bin bipartite
+make: bin max-bipartite
 
-bipartite: bin/max_bipartite.o bin/functions.o
+max-bipartite: bin/max_bipartite.o bin/functions.o
 	$(link) $@
 
 bin:
@@ -27,4 +27,4 @@ bin/functions.o: src/functions.cc
 	$(compile) $@
 
 clean:
-	rm -f bin/*.o bipartite
+	rm -f bin/*.o max-bipartite
