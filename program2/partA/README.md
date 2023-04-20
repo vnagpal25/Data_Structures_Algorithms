@@ -6,8 +6,9 @@ First, make sure you have the following in your directory:
 - src/maxheap.cc
 - src/minheap.cc
 - input.txt
+- bin/ (directory)
 
-Second, depending on if you want to run the minheap or maxheap function, type "make minheap" or "make maxheap"into the command line
+Second, depending on if you want to run the minheap or maxheap function, type "make minheap" or "make maxheap"into the command line. If you want to compile both, simply type "make".
 
 Third, type "./maxheap" if you want to execute the maxheap function, or "./minheap" if you want to execute the minheap function.
 
