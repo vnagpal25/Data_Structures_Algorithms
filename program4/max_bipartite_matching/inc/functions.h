@@ -18,6 +18,16 @@ class MaxBipartiteMatching {
     int label = 0;
   };
 
+  void PrintResults();
+  
+  void ModifyInMatching(Node v, int label);
+
+  void ModifyInQueue(Node v, int label);
+
+  void SetNodeLabel(Node v, int label);
+
+  Node LabelMate(Node w);
+
   void UpdateFreedoms();
 
   void ReinitializeQueue();
@@ -29,6 +39,8 @@ class MaxBipartiteMatching {
   void Remove(pair<Node, Node> toRemove);
 
   Node GetNodeByValue(int node_val);
+
+  bool Contains(vector<pair<Node, Node>> pairs, pair<Node, Node> pair);
 
   bool Contains(vector<Node> nodes, Node node);
 

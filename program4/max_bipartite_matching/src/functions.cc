@@ -9,6 +9,60 @@ using std::ifstream, std::ofstream, std::cout, std::cerr, std::endl,
     std::chrono::microseconds, std::chrono::high_resolution_clock, std::stod,
     std::min, std::find;
 
+void MaxBipartiteMatching::PrintResults() {
+  for (size_t i = 0; i < M.size(); i++)
+    cout << "(" << M[i].first.node_num_ << ", " << M[i].second.node_num_ << ")"
+         << endl;
+}
+
+void MaxBipartiteMatching::ModifyInMatching(Node v, int label) {
+  for (size_t i = 0; i < M.size(); i++) {
+    if (M[i].first.node_num_ == v.node_num_) M[i].first.label = label;
+    if (M[i].second.node_num_ == v.node_num_) M[i].second.label = label;
+  }
+}
+
+void MaxBipartiteMatching::ModifyInQueue(Node v, int label) {
+  queue<Node> temp_queue;
+  while (!Q.empty()) {
+    Node x = Q.front();
+    Q.pop();
+    if (x.node_num_ == v.node_num_) x.label = label;
+    temp_queue.push(x);  // add the struct to the temporary queue, whether or
+                         // not it was modified
+  }
+  Q.swap(temp_queue);  // swap the original queue with the temporary queue
+}
+
+void MaxBipartiteMatching::SetNodeLabel(Node v, int label) {
+  // first find the node in (V or U), Q, and M then set its value
+  if (Contains(V, v)) {
+    for (size_t i = 0; i < V.size(); i++)
+      if (v.node_num_ == V[i].node_num_) V[i].label = label;
+  } else if (Contains(U, v)) {
+    for (size_t i = 0; i < U.size(); i++)
+      if (v.node_num_ == U[i].node_num_) U[i].label = label;
+  }
+  // find+modify the node in Q
+  ModifyInQueue(v, label);
+
+  // find/modify the node in M
+  ModifyInMatching(v, label);
+}
+
+MaxBipartiteMatching::Node MaxBipartiteMatching::LabelMate(Node w) {
+  // Find the mate of w in M, then label that node with w.node_num_
+  for (size_t i = 0; i < M.size(); i++) {
+    if (M[i].first.node_num_ == w.node_num_) {
+      SetNodeLabel(M[i].second, w.node_num_);
+      return M[i].second;
+    } else if (M[i].second.node_num_ == w.node_num_) {
+      SetNodeLabel(M[i].first, w.node_num_);
+      return M[i].first;
+    }
+  }
+}
+
 void MaxBipartiteMatching::UpdateFreedoms() {
   // iterate through M,
   for (size_t i = 0; i < M.size(); i++) {
@@ -31,6 +85,8 @@ void MaxBipartiteMatching::UpdateFreedoms() {
 
 void MaxBipartiteMatching::ReinitializeQueue() {
   // find all free vertices in V?
+  for (Node v : V)
+    if (v.is_free_) Q.push(v);
 }
 
 void MaxBipartiteMatching::RemoveLabels() {
@@ -59,6 +115,15 @@ MaxBipartiteMatching::Node MaxBipartiteMatching::GetNodeByValue(int node_val) {
     if (U[j].node_num_ == node_val) return U[j];
 
   return {NULL, NULL, NULL};
+}
+
+bool MaxBipartiteMatching::Contains(vector<pair<Node, Node>> pairs,
+                                    pair<Node, Node> pair) {
+  for (size_t i = 0; i < pairs.size(); i++)
+    if ((pairs[i].first.node_num_ == pair.first.node_num_) &&
+        (pairs[i].second.node_num_ == pair.second.node_num_))
+      return true;
+  return false;
 }
 
 bool MaxBipartiteMatching::Contains(vector<Node> nodes, Node node) {
@@ -138,10 +203,7 @@ void MaxBipartiteMatching::MaxBipartiteMatch(string file_name) {
   }
 
   // Q will contain 1, 2 ,3, 4, 5 or whatever else is in V
-  for (Node v : V) {
-    // sanity check all nodes should be free to begin with
-    if (v.is_free_) Q.push(v);
-  }
+  ReinitializeQueue();
 
   while (!Q.empty()) {
     Node w = Q.front();  // w ← Front(Q)
@@ -162,13 +224,11 @@ void MaxBipartiteMatching::MaxBipartiteMatch(string file_name) {
             Node v = w;
             // while v is labeled
             while (v.label != 0) {
-              /**
-               * u ← vertex indicated by v’s label; M ← M − (v, u)
-                  v ← vertex indicated by u’s label; M ← M ∪ (v, u)
-              */
+              // u ← vertex indicated by v’s label; M ← M − (v, u)
               u = GetNodeByValue(v.label);
               Remove({v, u});
 
+              // v ← vertex indicated by u’s label; M ← M ∪ (v, u)
               v = GetNodeByValue(u.label);
               Add({v, u});
             }
@@ -180,13 +240,28 @@ void MaxBipartiteMatching::MaxBipartiteMatch(string file_name) {
 
             // reinitialize Q with all free vertices in V
             ReinitializeQueue();
+
+            break;
           } else {
             // u is matched
+            if (Contains(M, {w, u}) && (u.label == 0)) {
+              u.label = w.node_num_;
+              Q.push(u);
+            }
           }
         }
       }
     } else {
       // w is in U (and matched)
+      /**
+       * label the mate v of w with w
+       *Enqueue(Q, v)
+       */
+      Node v = LabelMate(w);  // Label w's mate v
+      Q.push(v);
     }
   }
+
+  // Print results, praying it works haha
+  PrintResults();
 }
