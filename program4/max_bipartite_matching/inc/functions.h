@@ -1,7 +1,3 @@
-/**
- * Copyright 2023 - Function definitions for Floyd's Algorithm for all pairs
- * shortest paths Author - vnagpal
- */
 #ifndef PROGRAM4_MAX_BIPARTITE_MATCHING_ALG_INC_FUNCTIONS_H_
 #define PROGRAM4_MAX_BIPARTITE_MATCHING_INC_FUNCTIONS_H_
 #include <algorithm>
@@ -10,22 +6,45 @@
 #include <fstream>   // I/O to files
 #include <iostream>  // I/O
 #include <queue>
-#include <string>                            // string functionality
-#include <vector>                            // vector functionality
-using std::string, std::vector, std::queue;  // readability
+#include <string>  // string functionality
+#include <utility>
+#include <vector>                                       // vector functionality
+using std::string, std::vector, std::queue, std::pair;  // readability
+class MaxBipartiteMatching {
+ public:
+  struct Node {
+    int node_num_;
+    bool is_free_;
+    int label = 0;
+  };
 
-bool Contains(vector<Node> nodes, Node node);
+  void UpdateFreedoms();
 
-bool IsAdjacent(int first_node_val, int second_node_val, int** adj_mat);
+  void ReinitializeQueue();
 
-void ParseLine(vector<Node>* V, string line);
+  void RemoveLabels();
 
-int** ReadInput(string file_name, vector<Node>* V, vector<Node>* U, int* size);
+  void Add(pair<Node, Node> toAdd);
 
-void MaxBipartiteMatch(string file_name);
+  void Remove(pair<Node, Node> toRemove);
 
-struct Node {
-  int node_num_;
-  bool is_free_;
+  Node GetNodeByValue(int node_val);
+
+  bool Contains(vector<Node> nodes, Node node);
+
+  bool IsAdjacent(int first_node_val, int second_node_val, int** adj_mat);
+
+  void ParseLine(vector<Node> V, string line);
+
+  void ReadInput(string file_name);
+
+  void MaxBipartiteMatch(string file_name);
+
+ private:
+  vector<Node> V, U;
+  int size_;
+  int** adj_mat;
+  vector<pair<Node, Node>> M;  // M contains all of the matched pairs
+  queue<Node> Q;
 };
 #endif  // PROGRAM4_MAX_BIPARTITE_MATCHING_INC_FUNCTIONS_H_
