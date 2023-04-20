@@ -61,16 +61,16 @@ MaxBipartiteMatching::Node MaxBipartiteMatching::LabelMate(Node w) {
       return M[i].first;
     }
   }
+
+  return {0, 0, 0};
 }
 
 void MaxBipartiteMatching::UpdateFreedoms() {
   // iterate through M,
   for (size_t i = 0; i < M.size(); i++) {
-    M[i].first;
     // now that we have which elements are not "free", let us update their
     // freedoms in V and U
     // find M[i].first in V or U and change .is_free = false
-    M[i].second;
     for (size_t j = 0; j < V.size(); j++)
       if ((M[i].first.node_num_ == V[j].node_num_) ||
           (M[i].second.node_num_ == V[j].node_num_))
@@ -84,6 +84,8 @@ void MaxBipartiteMatching::UpdateFreedoms() {
 }
 
 void MaxBipartiteMatching::ReinitializeQueue() {
+  while (!Q.empty()) Q.pop();
+
   // find all free vertices in V?
   for (Node v : V)
     if (v.is_free_) Q.push(v);
@@ -114,7 +116,7 @@ MaxBipartiteMatching::Node MaxBipartiteMatching::GetNodeByValue(int node_val) {
   for (size_t j = 0; j < U.size(); j++)
     if (U[j].node_num_ == node_val) return U[j];
 
-  return {NULL, NULL, NULL};
+  return {0, 0, 0};
 }
 
 bool MaxBipartiteMatching::Contains(vector<pair<Node, Node>> pairs,
@@ -200,29 +202,44 @@ void MaxBipartiteMatching::MaxBipartiteMatch(string file_name) {
     }
     cout << endl;
   }
+  cout << "populated adjacency matrix" << endl;
 
   // Q will contain 1, 2 ,3, 4, 5 or whatever else is in V
   ReinitializeQueue();
 
+  cout << "initialized queue" << endl;
+
   while (!Q.empty()) {
+    cout << "Q size: " << Q.size() << endl;
+
+    // cout << "reached inside" << endl;
     Node w = Q.front();  // w ← Front(Q)
     Q.pop();             // Dequeue(Q)
+    cout << "w: " << w.node_num_ << ", label: " << w.label
+         << ", free: " << w.is_free_ << endl;
 
     // if w in V
     if (Contains(V, w)) {
+      cout << "if statement is reached" << endl;
       // for every vertex u adjacent to w do
       // iterate through all vertices then inside that add an if statement
       // checking adjacency using the adj_mat. How to iterate over vertices?
       for (int i = 0; i < size_; i++) {
         if (IsAdjacent(w.node_num_, i + 1, adj_mat)) {
+          cout << "is adjacent at u = " << i + 1 << endl;
           // node specified by u is adjacent to w
           Node u = GetNodeByValue(i + 1);
           if (u.is_free_) {
+            cout << "u is free, u: " << u.node_num_ << ", label: " << u.label
+                 << ", free: " << u.is_free_ << endl;
             // augment
             Add({w, u});
+            PrintResults();
             Node v = w;
             // while v is labeled
             while (v.label != 0) {
+              cout << "v was labeled, backtracking augmented path" << endl;
+
               // u ← vertex indicated by v’s label; M ← M − (v, u)
               u = GetNodeByValue(v.label);
               Remove({v, u});
@@ -237,12 +254,23 @@ void MaxBipartiteMatching::MaxBipartiteMatch(string file_name) {
             // update all vertices freedom
             UpdateFreedoms();
 
+            for (size_t i = 0; i < V.size(); i++)
+              cout << "V[" << i << "]:" << V[i].node_num_
+                   << ", label: " << V[i].label << ", free: " << V[i].is_free_
+                   << endl;
+            cout << endl;
+            for (size_t i = 0; i < U.size(); i++)
+              cout << "U[" << i << "]:" << U[i].node_num_
+                   << ", label: " << U[i].label << ", free: " << U[i].is_free_
+                   << endl;
+
             // reinitialize Q with all free vertices in V
             ReinitializeQueue();
 
             break;
           } else {
             // u is matched
+            cout << "u is matched smh" << endl;
             if (Contains(M, {w, u}) && (u.label == 0)) {
               u.label = w.node_num_;
               Q.push(u);
@@ -256,9 +284,12 @@ void MaxBipartiteMatching::MaxBipartiteMatch(string file_name) {
        * label the mate v of w with w
        *Enqueue(Q, v)
        */
+      cout << "this else statement was reached" << endl;
       Node v = LabelMate(w);  // Label w's mate v
       Q.push(v);
     }
+
+    // sleep(10);
   }
 
   // Print results, praying it works haha

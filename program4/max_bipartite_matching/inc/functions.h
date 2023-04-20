@@ -1,5 +1,7 @@
 #ifndef PROGRAM4_MAX_BIPARTITE_MATCHING_ALG_INC_FUNCTIONS_H_
 #define PROGRAM4_MAX_BIPARTITE_MATCHING_INC_FUNCTIONS_H_
+#include <unistd.h>
+
 #include <algorithm>
 #include <chrono>    // for execution times
 #include <cmath>     // floor()
@@ -46,7 +48,7 @@ class MaxBipartiteMatching {
 
   bool IsAdjacent(int first_node_val, int second_node_val, int** adj_mat);
 
-  void ParseLine(vector<Node> *V, string line);
+  void ParseLine(vector<Node>* V, string line);
 
   void ReadInput(string file_name);
 
