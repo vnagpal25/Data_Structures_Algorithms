@@ -65,7 +65,7 @@ void FloydsAlgorithm(string file_name) {
 
   // D ^ (0) = W
   vector<vector<double>> dist_mat = weight_mat;
-  int size = dist_mat.size();
+  size_t size = dist_mat.size();
 
   // outer for loop iterates through all possible intermediary nodes, k = 0 can
   // go through node 0, k = 1 can go through nodes 0, 1, k = n can go through
