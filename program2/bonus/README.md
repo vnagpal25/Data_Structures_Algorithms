@@ -5,8 +5,8 @@ First, make sure you have the following in your directory:
 - src/heapsort.cc
 - inc/functions.h
 - input.txt
-
-Second, type "make clean", press enter,  then "make heapsort" then enter into the command line.
+- bin/ (directory)
+Second, type "make clean", press enter,  then "make" or "make heapsort" then enter into the command line.
 
 Third, type "./heapsort" into the command line 
 
