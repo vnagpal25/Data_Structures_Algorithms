@@ -196,50 +196,31 @@ void MaxBipartiteMatching::MaxBipartiteMatch(string file_name) {
   // populates graph adjacency matrix, V, and U
   ReadInput(file_name);
 
-  for (int i = 0; i < size_; i++) {
-    for (int j = 0; j < size_; j++) {
-      cout << adj_mat[i][j] << " ";
-    }
-    cout << endl;
-  }
-  cout << "populated adjacency matrix" << endl;
-
   // Q will contain 1, 2 ,3, 4, 5 or whatever else is in V
   ReinitializeQueue();
 
-  cout << "initialized queue" << endl;
 
   while (!Q.empty()) {
-    cout << "Q size: " << Q.size() << endl;
-
     // cout << "reached inside" << endl;
     Node w = Q.front();  // w ← Front(Q)
     Q.pop();             // Dequeue(Q)
-    cout << "w: " << w.node_num_ << ", label: " << w.label
-         << ", free: " << w.is_free_ << endl;
 
     // if w in V
     if (Contains(V, w)) {
-      cout << "if statement is reached" << endl;
       // for every vertex u adjacent to w do
       // iterate through all vertices then inside that add an if statement
       // checking adjacency using the adj_mat. How to iterate over vertices?
       for (int i = 0; i < size_; i++) {
         if (IsAdjacent(w.node_num_, i + 1, adj_mat)) {
-          cout << "is adjacent at u = " << i + 1 << endl;
           // node specified by u is adjacent to w
           Node u = GetNodeByValue(i + 1);
           if (u.is_free_) {
-            cout << "u is free, u: " << u.node_num_ << ", label: " << u.label
-                 << ", free: " << u.is_free_ << endl;
             // augment
             Add({w, u});
             PrintResults();
             Node v = w;
             // while v is labeled
             while (v.label != 0) {
-              cout << "v was labeled, backtracking augmented path" << endl;
-
               // u ← vertex indicated by v’s label; M ← M − (v, u)
               u = GetNodeByValue(v.label);
               Remove({v, u});
@@ -254,25 +235,14 @@ void MaxBipartiteMatching::MaxBipartiteMatch(string file_name) {
             // update all vertices freedom
             UpdateFreedoms();
 
-            for (size_t i = 0; i < V.size(); i++)
-              cout << "V[" << i << "]:" << V[i].node_num_
-                   << ", label: " << V[i].label << ", free: " << V[i].is_free_
-                   << endl;
-            cout << endl;
-            for (size_t i = 0; i < U.size(); i++)
-              cout << "U[" << i << "]:" << U[i].node_num_
-                   << ", label: " << U[i].label << ", free: " << U[i].is_free_
-                   << endl;
-
             // reinitialize Q with all free vertices in V
             ReinitializeQueue();
 
             break;
           } else {
             // u is matched
-            cout << "u is matched smh" << endl;
-            if (Contains(M, {w, u}) && (u.label == 0)) {
-              u.label = w.node_num_;
+            if (!Contains(M, {w, u}) && (u.label == 0)) {
+              SetNodeLabel(u, w.node_num_);
               Q.push(u);
             }
           }
@@ -284,12 +254,10 @@ void MaxBipartiteMatching::MaxBipartiteMatch(string file_name) {
        * label the mate v of w with w
        *Enqueue(Q, v)
        */
-      cout << "this else statement was reached" << endl;
       Node v = LabelMate(w);  // Label w's mate v
       Q.push(v);
     }
 
-    // sleep(10);
   }
 
   // Print results, praying it works haha
