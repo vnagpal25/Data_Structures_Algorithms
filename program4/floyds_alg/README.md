@@ -15,7 +15,7 @@ First, make sure you have the following in your directory:
       
 
 
-Second, type "make floyds" into your command line
+Second, type "make" into your command line
 
 Third, type "./floyds" into your command line
 
