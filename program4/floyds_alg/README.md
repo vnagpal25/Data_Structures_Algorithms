@@ -3,12 +3,11 @@ First, make sure you have the following in your directory:
 - makefile
 - inc/functions.h
 - src/functions.cc
-- src/maxheap.cc
-- src/minheap.cc
+- src/floyds.cc
 - input.txt
   - make sure disconnected nodes are represented by 0 weight distances as well
   - have the input formatted as, with spaces within lines. If infinite distance between two nodes
-    , represent as inf in the input:
+    , represent as inf in the input (see input.txt for reference):
     - X X X X
     - X X X X
     - X X X X
@@ -16,8 +15,8 @@ First, make sure you have the following in your directory:
       
 
 
-Second, depending on if you want to run the minheap or maxheap function, type "make minheap" or "make maxheap"into the command line
+Second, type "make floyds" into your command line
 
-Third, type "./maxheap" if you want to execute the maxheap function, or "./minheap" if you want to execute the minheap function.
+Third, type "./floyds" into your command line
 
-Depending on which command was entered "output.txt" should contain either the minheap or the maxheap from the given data.
+There should be a file named output.txt with the resulting distance matrix.
