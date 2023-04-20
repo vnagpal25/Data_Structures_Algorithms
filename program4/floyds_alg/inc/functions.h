@@ -4,13 +4,13 @@
  */
 #ifndef PROGRAM2_FLOYDS_ALG_INC_FUNCTIONS_H_
 #define PROGRAM2_FLOYDS_ALG_INC_FUNCTIONS_H_
-#include <chrono>    // for execution times
-#include <cmath>     // floor()
-#include <fstream>   // I/O to files
-#include <iostream>  // I/O
-#include <string>    // string functionality
-#include <vector>    //vector functionality
-using std::string, std::vector;   // readability
+#include <chrono>                // for execution times
+#include <cmath>                 // floor()
+#include <fstream>               // I/O to files
+#include <iostream>              // I/O
+#include <string>                // string functionality
+#include <vector>                //vector functionality
+using std::string, std::vector;  // readability
 
 /**
  * method reads the input.txt file and populates a 2d double array representing
@@ -21,6 +21,8 @@ using std::string, std::vector;   // readability
  * distance matrix
  */
 vector<vector<double>> ReadInput(string file_name, int* size);
+
+void WriteOutput(vector<vector<double>> dist_mat);
 
 void FloydsAlgorithm(string file_name);
 #endif  // PROGRAM2_FLOYDS_ALG_INC_FUNCTIONS_H_

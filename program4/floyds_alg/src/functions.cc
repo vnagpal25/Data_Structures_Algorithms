@@ -41,6 +41,17 @@ vector<vector<double>> ReadInput(string file_name, int* kSize) {
   return weight_mat;
 }
 
+void WriteOutput(vector<vector<double>> dist_mat) {
+  ofstream out_file("output.txt");
+
+  for (size_t i = 0; i < dist_mat.size(); i++) {
+    for (size_t j = 0; j < dist_mat.size(); j++) {
+      out_file << dist_mat[i][j] << " ";
+    }
+    out_file << endl;
+  }
+}
+
 void FloydsAlgorithm(string file_name) {
   int size = 0;
   vector<vector<double>> weight_mat = ReadInput(file_name, &size);
@@ -64,9 +75,12 @@ void FloydsAlgorithm(string file_name) {
       }
     }
   }
+
+  WriteOutput(dist_mat);
+
   for (size_t i = 0; i < dist_mat.size(); i++) {
     for (size_t j = 0; j < dist_mat.size(); j++) {
-      cout << dist_mat[i][j] << "\t";
+      cout << dist_mat[i][j] << " ";
     }
     cout << endl;
   }
