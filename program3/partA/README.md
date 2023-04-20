@@ -5,8 +5,9 @@ First, make sure you have the following in your directory:
 - src/horspool.cc
 - inc/functions.h
 - input.txt
+- bin/ (directory)
 
-Second, type "make clean", press enter, then "make horspool" then enter into the command line.
+Second, type "make clean", press enter, then "make horspool" or "make" then enter into the command line.
 
 Third, type "./horspool" into the command line
 
