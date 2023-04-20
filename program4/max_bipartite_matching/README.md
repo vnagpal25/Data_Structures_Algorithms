@@ -1,22 +1,21 @@
 First, make sure you have the following in your directory:
-
 - makefile
 - inc/functions.h
 - src/functions.cc
-- src/floyds.cc
+- src/max_bipartite.cc
+- bin/ (directory)
 - input.txt
-  - make sure disconnected nodes are represented by 0 weight distances as well
-  - have the input formatted as, with spaces within lines. If infinite distance between two nodes
-    , represent as inf in the input (see input.txt for reference):
+  - have the first two rows represent the nodes that are in sets V and U, with spaces in between them
+  - number the nodes in the first two rows of the file starting from 1 (not 0)
+  - have the adjacency matrix formatted as follows, with spaces within lines. Make sure the size of the adjacency matrix is |V|+|U|
     - X X X X
     - X X X X
     - X X X X
     - X X X X
-      
-
+  - see input.txt and input2.txt for correctly formatted inputs
 
 Second, type "make" into your command line
 
-Third, type "./floyds" into your command line
+Third, type "./bipartite" into your command line
 
-There should be a file named output.txt with the resulting distance matrix.
+There should be a file named output.txt with the resulting maximum matching of the bipartite graph.
