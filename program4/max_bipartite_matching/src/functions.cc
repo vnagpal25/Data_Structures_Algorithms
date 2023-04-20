@@ -138,7 +138,7 @@ bool MaxBipartiteMatching::IsAdjacent(int first_node_val, int second_node_val,
   return (adj_mat[first_node_val - 1][second_node_val - 1] == 1);
 }
 
-void MaxBipartiteMatching::ParseLine(vector<Node> V, string line) {
+void MaxBipartiteMatching::ParseLine(vector<Node>* V, string line) {
   while (line.size()) {
     // finds the space
     const int index = static_cast<int>(line.find(" "));
@@ -155,14 +155,13 @@ void MaxBipartiteMatching::ParseLine(vector<Node> V, string line) {
       // free/unmatched
       // since we are starting with them all as unmatched, this will default to
       // true at the beginning
-      V.push_back({(stoi(token)), true});
-
+      V->push_back({(stoi(token)), true, 0});
       // changes the string to remove the
       // part just pushed to the vector
       line = line.substr(index + 1);
     } else {
-      V.push_back({(stoi(line)), true});  // " " not found, last element
-      line = "";                          // exit condition for while loop
+      V->push_back({(stoi(line)), true, 0});  // " " not found, last element
+      line = "";                              // exit condition for while loop
     }
   }
 }
@@ -171,10 +170,10 @@ void MaxBipartiteMatching::ReadInput(string file_name) {
   ifstream in_file(file_name);
   string line;
   getline(in_file, line);
-  ParseLine(V, line);
+  ParseLine(&V, line);
 
   getline(in_file, line);
-  ParseLine(U, line);
+  ParseLine(&U, line);
 
   size_ = V.size() + U.size();
 

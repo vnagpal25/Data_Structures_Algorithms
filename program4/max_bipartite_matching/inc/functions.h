@@ -19,7 +19,7 @@ class MaxBipartiteMatching {
   };
 
   void PrintResults();
-  
+
   void ModifyInMatching(Node v, int label);
 
   void ModifyInQueue(Node v, int label);
@@ -46,7 +46,7 @@ class MaxBipartiteMatching {
 
   bool IsAdjacent(int first_node_val, int second_node_val, int** adj_mat);
 
-  void ParseLine(vector<Node> V, string line);
+  void ParseLine(vector<Node> *V, string line);
 
   void ReadInput(string file_name);
 
