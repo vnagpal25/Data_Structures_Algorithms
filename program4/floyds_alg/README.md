@@ -12,8 +12,6 @@ First, make sure you have the following in your directory:
     - X X X X
     - X X X X
     - X X X X
-      
-
 
 Second, type "make" into your command line
 
