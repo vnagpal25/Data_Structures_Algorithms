@@ -279,6 +279,11 @@ void MaxBipartiteMatching::MaxBipartiteMatch(string file_name) {
 
   // Print results to output file
   PrintResults();
+
+  // Alerts user to check output
+  cout << "Maximum Bipartite Matching Algorithm Complete! Check output.txt for "
+          "the matching M between sets V and U"
+       << endl;
 }
 
 MaxBipartiteMatching::~MaxBipartiteMatching() {
