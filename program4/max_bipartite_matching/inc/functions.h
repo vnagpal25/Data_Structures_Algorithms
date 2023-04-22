@@ -57,7 +57,7 @@ class MaxBipartiteMatching {
 
  private:
   /**
-   * Overloading == operator for a pair of Nodes
+   * Friend overloading == operator for a pair of Nodes
    * @param left_pair lhs pair
    * @param right_pair rhs pair
    * @return true if both pairs have equivalent nodes, false otherwise
