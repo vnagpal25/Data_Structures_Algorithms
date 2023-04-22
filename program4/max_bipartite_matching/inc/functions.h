@@ -1,7 +1,7 @@
 /**
  * Copyright 2023 - Class Declaration for Maximum Bipartite Matching
  * @author vnagpal
-*/
+ */
 #ifndef PROGRAM4_MAX_BIPARTITE_MATCHING_INC_FUNCTIONS_H_
 #define PROGRAM4_MAX_BIPARTITE_MATCHING_INC_FUNCTIONS_H_
 #include <unistd.h>  // sleep() for debugging
@@ -50,6 +50,9 @@ class MaxBipartiteMatching {
    */
   void MaxBipartiteMatch(string file_name);
 
+  /**
+   * Destructor to reallocate allocated memory
+   */
   ~MaxBipartiteMatching();
 
  private:
@@ -177,7 +180,7 @@ class MaxBipartiteMatching {
   vector<NodePair> M;  // M contains all of the matched pairs
   queue<Node> Q;       // bfs queue of nodes being explored
 
-  int size_;      // number of nodes in graph
-  int** adj_mat;  // adjacency matrix of graph
+  int size_;                // number of nodes in graph
+  int** adj_mat = nullptr;  // adjacency matrix of graph
 };
 #endif  // PROGRAM4_MAX_BIPARTITE_MATCHING_INC_FUNCTIONS_H_
