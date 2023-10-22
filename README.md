@@ -1,2 +1,1 @@
-# CSCE350_programs
-Repository for CSCE350 (Data Structures and Algorithms) Programming Assignments
+Repository for Data Structures and Algorithms projects/implementations
